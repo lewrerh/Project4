@@ -28,60 +28,88 @@ class Game {
   
 /* Begins game by selecting a random phrase and displaying it to user*/
 
-startGame() {                                          /*g
-    Get the overlay and hide it*/
+startGame() {
+        
+    // Get the overlay and hide it
     let overlay = document.getElementById("overlay");
-    overlay.style.display = "none";                    /*Check for previous win and update the overlay class from win to start*/
-   if (overlay.classList.contains("win"))
-   overlay.className = overlay.className.replace(/\bwin\b/g, "start");     /*Check if previously lost and update the overlay class fom lose to start*/
-   if (overlay.classList.contains("lose"))
-   overlay.className = overlay.className.replace(/\blose\b/g, "start");   /*Get a random phrase object*/
-   let phraseObj = this.getRandomPhrase();            /*Add the phrase to the display*/
-   phraseObj.addPhraseToDisplay();                    /*Set the active phrase object*/
-   this.activePhrase = phraseObj;
+    overlay.style.display = "none";
+
+    // Check if we won previously and update the overlay class from win to start
+    if (overlay.classList.contains("win"))
+       overlay.className = overlay.className.replace(/\bwin\b/g, "start");
+
+    // Check if we lost previously and update the overlay class from lose to start
+    if (overlay.classList.contains("lose"))
+    overlay.className = overlay.className.replace(/\blose\b/g, "start");
+
+    // Get a randomn phrase Object
+    let phraseObj = this.getRandomPhrase();
+    
+    
+    // Add the Phrase to the display
+    phraseObj.addPhraseToDisplay();
+
+    // Set the active phrase object
+    this.activePhrase = phraseObj;
+
 }
 
-checkForWin() {                                                      //Getting leters that have a class named letter
-    const letters = document.getElementsByClassName('letter');       //loop thru letter to check if it has the CSS class hide.
-        for (let m = 0; m < letters.length; m++) {                   //if it does, user hasn't revealed all letters so no win.
-            if (letters[m].classList.contains('hide'))               //value increased if missed, removes a life, check remaining lives & ends games if out of lives.
-                return false;
-        } 
-        return true;   
+checkForWin() {
+
+    // Get the Letters that have a class name called letter
+    const letters = document.getElementsByClassName("letter");
+
+    // Loop through the letters and check if it has the css class hide.
+    // If it does, the user has not revealed all the letters, so no win
+    for (let m = 0; m < letters.length; m++) {
+        if (letters[m].classList.contains("hide"))
+            return false;
+    }
+
+    return true;
+
 }
     
 
-    removeLife() {
-        const lives = document.getElementsByClassName("tries");        //Get all the lives
-        lives[this.missed].firstElementChild.src = "images/lostHeart.png";
-        if (this.missed == 4) {
-            this.gameOver(false);
+removeLife() {
+
+    // Get all the lives
+    const lives = document.getElementsByClassName("tries");
+    
+    lives[this.missed].firstElementChild.src = "images/lostHeart.png";
+
+    if (this.missed == 4) {
+        this.gameOver(false);
+    }
+
+    this.missed++;
+}
+
+
+gameOver(gameWon) {
+
+        
+        let overlay = document.getElementById("overlay");        // Display the original start screen overlay
+        overlay.style.display = "block";
+
+        const game_over_message = document.getElementById("game-over-message");  // Get the overlay h1 element
+
+        if (gameWon) {                                                          // If the user won the game, display win message, else display loss msg
+            game_over_message.innerText = "Great Job!";
+            overlay.className = overlay.className.replace(/\bstart\b/g, "win");
         }
-        this.missed++;
-    }
-
-gameOver(gameWon) {                               //Display original start screen overlay
-    let overlay = document.getElementById("overlay");
-    overlay.style.display = "block";
-//Get the overlay h1 element
-    const game_over_message = document.getElementById("game_over_message");
-
-    if (gameWon) {                                   //If won game display win message, else displase lose message
-        game_over_message.innerText = "Great Job!";
-        overlay.className = overlay.className.replace(/\bstart\b/g, "win");
-    }
-    else {
-
-            game_over_messageinnerText = "Sorry, better luck next time!";
+        else {
+            game_over_message.innerText = "Sorry, better luck next time!";
             overlay.className = overlay.className.replace(/\bstart\b/g, "lose");
         }
+
 //Reset some properties, remove all the li elements from the Phrase ul element
 //get the phrase ul element
         let phraseUl = document.getElementsByTagName("ul");
-//Get the Letters that have a class name called letter & also get the spaces
-const letters = document.querySelectorAll(".letter");
+
+const letters = document.querySelectorAll(".letter");                      //Get the Letters that have a class name called letter & also get the spaces
 const spaces = document.querySelectorAll(".space");
-//Remove all the letters & spaces also
+                                                                         //Remove all the letters & spaces also
         for (let n = 0; n < letters.length; n++) {
             phraseUl[0].removeChild(letters[n]);
         }
@@ -98,7 +126,7 @@ const spaces = document.querySelectorAll(".space");
                     buttons[p].classList.remove("chosen");
 
                 if (buttons[p].classList.contains("wrong"))
-                buttons[p].classList.remove("wrong");
+                    buttons[p].classList.remove("wrong");
         }
         
 //Reset all the heart images
@@ -112,18 +140,19 @@ const spaces = document.querySelectorAll(".space");
     handleInteraction(button) {
         button.disabled = true;
 
-            if (this.activePhrase.checkLetter(button.innerText)) {
-                button.classList.add("chosen");
-                this.activePhrase.showMatchedLetter(button.innerText);
+        if (this.activePhrase.checkLetter(button.innerText)) {
+            button.classList.add("chosen");
+            this.activePhrase.showMatchedLetter(button.innerText);
 
-                if (this.checkForWin()) {
-                    this.gameOver(true);
-
-                }
-            } 
-                else {
-                    button.classList.add("wrong");
-                    this.removeLife();
-                }
+            if (this.checkForWin()) {
+                this.gameOver(true); 
             }
         }
+        else {
+
+            button.classList.add("wrong");
+            this.removeLife();
+        }
+
+    }
+}

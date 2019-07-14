@@ -28,6 +28,7 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  background-color: darkcyan
 }
 
 li, ol, ul {
@@ -130,6 +131,12 @@ button {
   justify-content: center;
 }
 
+.key {
+  font-weight:bold;
+  border:5px insert black
+}
+
+
 .chosen {
   background: #3a3f58;
   border-radius: 5px;
@@ -188,7 +195,7 @@ button {
 }
 
 .win {
-  background-color: var(--color-win);
+  background-color: greenyellow;
 }
 
 .win a {
@@ -196,7 +203,7 @@ button {
 }
 
 .lose {
-  background-color: #f5785f;
+  background-color: darkorange;
 }
 
 .lose a {

@@ -71,6 +71,9 @@ let game;
         // Call the game object function handleInteraction
         if(s != 26)
             game.handleInteraction(buttons[s]);
+        //Also extra credit added to CSS styles to change background color on the Body to darkcyan
+        //changed the lose background color to orange & win background color to greenyellow
+        //Changed the CSS Keyrow to add bold font and border to black
         
     
     });
