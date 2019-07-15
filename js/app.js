@@ -75,6 +75,7 @@ let game;
         //changed the lose background color to orange & win background color to greenyellow
         //Changed the CSS Keyrow to add bold font and border to black
         //Border to black is also added to the phrase keys
+        //For my strart screen extra credit, I used the CSS fade out color blue/yellow
         
     
     });
