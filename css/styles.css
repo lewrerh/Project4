@@ -101,7 +101,7 @@ button {
   margin-right: 2px;
   color: transparent;
   background: var(--color-neutral-light);
-  border-radius: 5px;
+  border-radius: 5px; border:5px solid black
 }
 
 .space {
@@ -133,7 +133,7 @@ button {
 
 .key {
   font-weight:bold;
-  border:5px insert black
+  border:border:5px solid black; border:5px solid black
 }
 
 
@@ -195,7 +195,7 @@ button {
 }
 
 .win {
-  background-color: greenyellow;
+  background-color: rgb(60, 0, 139);
 }
 
 .win a {
@@ -203,7 +203,7 @@ button {
 }
 
 .lose {
-  background-color: darkorange;
+  background-color: rgb(42, 151, 165);
 }
 
 .lose a {

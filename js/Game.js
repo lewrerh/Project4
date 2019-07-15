@@ -11,11 +11,11 @@ class Game {
 
     createPhrases() {
         let phraseArr = [];
-        phraseArr.push(new Phrase("Jesus is lord"));
-        phraseArr.push(new Phrase("Blessings in the name of Jesus"));
-        phraseArr.push(new Phrase("Favor grace"));
-        phraseArr.push(new Phrase("Anointed preacher"));
-        phraseArr.push(new Phrase("Bible text"));
+        phraseArr.push(new Phrase("In it to win it"));
+        phraseArr.push(new Phrase("No pain no gain"));
+        phraseArr.push(new Phrase("Houston we got a problem"));
+        phraseArr.push(new Phrase("Can not stop and will not stop"));
+        phraseArr.push(new Phrase("You got this keep going"));
 
         return phraseArr;
     }
@@ -67,8 +67,8 @@ checkForWin() {
     }
 
     return true;
-
 }
+
     
 
 removeLife() {
@@ -86,30 +86,35 @@ removeLife() {
 }
 
 
+
 gameOver(gameWon) {
 
-        
-        let overlay = document.getElementById("overlay");        // Display the original start screen overlay
-        overlay.style.display = "block";
+    // Display the original start screen overlay
+    let overlay = document.getElementById("overlay");
+    overlay.style.display = "block";
 
-        const game_over_message = document.getElementById("game-over-message");  // Get the overlay h1 element
+    // Get the overlay h1 element
+    const game_over_message = document.getElementById("game-over-message");
 
-        if (gameWon) {                                                          // If the user won the game, display win message, else display loss msg
-            game_over_message.innerText = "Great Job!";
-            overlay.className = overlay.className.replace(/\bstart\b/g, "win");
-        }
-        else {
-            game_over_message.innerText = "Sorry, better luck next time!";
-            overlay.className = overlay.className.replace(/\bstart\b/g, "lose");
-        }
+    // If the user won the game, display win message, else display loss
+    // message
+    if (gameWon) {
+        game_over_message.innerText = "Great Job!";
+        overlay.className = overlay.className.replace(/\bstart\b/g, "win");
+    }
+    else {
+        game_over_message.innerText = "Sorry, better luck next time!";
+        overlay.className = overlay.className.replace(/\bstart\b/g, "lose");
+    }
+
 
 //Reset some properties, remove all the li elements from the Phrase ul element
 //get the phrase ul element
         let phraseUl = document.getElementsByTagName("ul");
 
-const letters = document.querySelectorAll(".letter");                      //Get the Letters that have a class name called letter & also get the spaces
+const letters = document.querySelectorAll(".letter");      //Get the Letters that have a class name called letter & also get the spaces
 const spaces = document.querySelectorAll(".space");
-                                                                         //Remove all the letters & spaces also
+                                                           //Remove all the letters & spaces also
         for (let n = 0; n < letters.length; n++) {
             phraseUl[0].removeChild(letters[n]);
         }
@@ -118,24 +123,35 @@ const spaces = document.querySelectorAll(".space");
         }
 //Enable all of the onccreen keyboard buttons and update each to use the 'key' CSS class.
 //and not use the 'chosen' or 'wrong' CSS classes as before.
-        const buttons = document.getElementsByClassName("key");
-            for (let p = 0; p < buttons.length; p++) {
-                buttons[p].disabled = false;
+const buttons = document.getElementsByClassName("key");
 
-                if (buttons[p].classList.contains("chosen"))
-                    buttons[p].classList.remove("chosen");
+for (let p = 0; p < buttons.length; p++) {
+    
+    buttons[p].disabled = false;
 
-                if (buttons[p].classList.contains("wrong"))
-                    buttons[p].classList.remove("wrong");
-        }
-        
-//Reset all the heart images
-        const lives = document.getElementsByClassName("tries");
+    if (buttons[p].classList.contains("chosen"))
+        buttons[p].classList.remove("chosen");
 
-        for (let v = 0; v < lives.length; v++)
-        lives[v].firstElementChild.src = "imges/liveHeart.png";
-        
-    }
+    if (buttons[p].classList.contains("wrong"))
+       buttons[p].classList.remove("wrong");
+}
+
+// Reset all of the heart images
+
+const lives = document.getElementsByClassName("tries");
+
+for (let v = 0; v < lives.length; v++) 
+    lives[v].firstElementChild.src = "images/liveHeart.png";
+
+}
+// Check if the phrase contains the guessed letter, if it contains it,
+        // add the chosen CSS class to the selected letter's keyboard button,
+        // call the showMatchedLetter() method on the phrase, and then
+        // call the checkForWin() method, if the player has won the game, 
+        // also call the gameOver() method if not, add the wrong CSS class 
+        // to the selected letter's keyboard button and call the removeLife 
+        // method
+
 
     handleInteraction(button) {
         button.disabled = true;

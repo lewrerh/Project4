@@ -74,6 +74,7 @@ let game;
         //Also extra credit added to CSS styles to change background color on the Body to darkcyan
         //changed the lose background color to orange & win background color to greenyellow
         //Changed the CSS Keyrow to add bold font and border to black
+        //Border to black is also added to the phrase keys
         
     
     });
